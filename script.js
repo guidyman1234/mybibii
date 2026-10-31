@@ -6,7 +6,7 @@
 const CONFIG = {
   start:       [2025, 11, 1],  // day you got together  [year, month, day]
   anniversary: [2026, 11, 1],  // 1-year anniversary
-  pin:         '2002'          // <-- CHANGE: her birth year (the password on the first page)
+  pin:         '2541'          // <-- CHANGE: her birth year (the password on the first page)
 };
 
 /* ---------- date helpers ---------- */
