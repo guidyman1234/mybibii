@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Videos 🎬</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  .vcard { background:#fff; border:1px solid var(--border); border-radius:var(--r-lg); overflow:hidden; cursor:pointer; }
+  .vposter { position:relative; background:#0d0408; display:flex; align-items:center; justify-content:center; }
+  .vposter img { width:100%; max-height:65vh; object-fit:contain; display:block; }   /* static still, never cropped */
+  .vplay { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,.12); pointer-events:none; }
+  .vplay span { width:56px; height:56px; border-radius:50%; background:rgba(255,255,255,.92); display:flex; align-items:center; justify-content:center; box-shadow:0 4px 20px rgba(0,0,0,.22); }
+  .vplay svg { width:24px; height:24px; fill:#e8789a; margin-left:3px; }
+  .vmeta { padding:12px 16px; }
+  .vtitle { font-size:14px; font-weight:500; color:var(--text-dark); }
+  .vdate { font-size:11px; color:var(--text-light); margin-top:2px; }
+  .vgrid { padding:0 20px; display:flex; flex-direction:column; gap:14px; }
+
+  .vover { display:none; position:fixed; inset:0; background:#000; z-index:999; align-items:center; justify-content:center; }
+  .vover.open { display:flex; }
+  .vover video { width:100%; height:100%; object-fit:contain; }
+  .vclose { position:absolute; top:max(16px, env(safe-area-inset-top)); right:16px; z-index:1000; width:38px; height:38px; border-radius:50%; border:none; background:rgba(255,255,255,.2); color:#fff; font-size:18px; cursor:pointer; }
+</style>
+</head>
+<body>
+
+<div class="vover" id="vover"><button class="vclose" onclick="closeVid()">✕</button><video id="vplayer" controls playsinline></video></div>
+
+<div class="page-wrapper">
+  <div class="page-top fade-up">
+    <p class="page-eyebrow">moving memories</p>
+    <h1 class="page-title">Videos 🎬</h1>
+    <p class="page-sub">Clips I never want to forget</p>
+  </div>
+  <div class="vgrid" id="vgrid"></div>
+</div>
+
+<nav class="nav-bar" data-active="video"></nav>
+<script src="script.js"></script>
+<script>
+/* =========================================================
+   VIDEOS — one line per clip. poster = still picture shown before playing.
+   ========================================================= */
+const VIDEOS = [
+  { title:'1st time sticker with Chuu',     date:'Nov 2025', src:'video/1st_time sticker.MP4', poster:'images/poster/sticker-nov.jpg' },
+  { title:'study together 🔥',               date:'Feb 2026', src:'video/IMG_1925.mov',         poster:'images/poster/study-feb.jpg'  },
+  { title:'sticker booth with Bibii',       date:'Mar 2026', src:'video/sculpture.MP4',        poster:'images/mar/1-3-2026.JPG'      },
+  { title:'random things while vdo call',   date:'Apr 2026', src:'video/call-apr.mov',         poster:'images/poster/call-apr.jpg'   }
+];
+
+const grid = document.getElementById('vgrid');
+VIDEOS.forEach((v, i) => {
+  const card = document.createElement('div'); card.className = 'vcard fade-up fade-up-' + Math.min(5, i + 1);
+  card.innerHTML = '<div class="vposter"><img alt=""><div class="vplay"><span><svg viewBox="0 0 24 24"><path d="M5 3l14 9-14 9V3z"/></svg></span></div></div>' +
+                   '<div class="vmeta"><div class="vtitle"></div><div class="vdate"></div></div>';
+  const img = card.querySelector('img'); img.src = encodeURI(v.poster); img.onerror = () => { img.style.display = 'none'; card.querySelector('.vposter').style.minHeight = '220px'; };
+  card.querySelector('.vtitle').textContent = v.title; card.querySelector('.vdate').textContent = v.date;
+  card.onclick = () => playVid(v.src); grid.appendChild(card);
+});
+
+function playVid(src) { const p = document.getElementById('vplayer'); p.src = encodeURI(src); document.getElementById('vover').classList.add('open'); p.play().catch(() => {}); }
+function closeVid() { const p = document.getElementById('vplayer'); p.pause(); p.removeAttribute('src'); p.load(); document.getElementById('vover').classList.remove('open'); }
+</script>
+</body>
+</html>
