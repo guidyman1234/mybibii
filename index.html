@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>For My Love 🤍</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- SPLASH -->
+<div class="splash" id="splashPage">
+  <div class="splash-badge">1 year together 🎀</div>
+  <img class="splash-photo" src="images/nov/1-11-2025.JPG" alt=""
+       onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'splash-photo',textContent:'📸'}))">
+  <h1 class="splash-title">One year<br>with you ♡</h1>
+  <p class="splash-sub">A little something made just for you</p>
+  <button class="btn-primary" onclick="goToLock()">Open your gift &nbsp;💗</button>
+</div>
+
+<!-- PASSWORD -->
+<div class="lock-page" id="lockPage">
+  <img class="lock-photo" src="images/dec/25-12-2025.JPG" alt="" onerror="this.style.display='none'">
+  <div class="lock-body">
+    <h2 class="lock-title">What's your birth year?</h2>
+    <p class="lock-sub">Enter to unlock 💗</p>
+    <div class="pin-dots">
+      <div class="pin-dot" id="d0"></div><div class="pin-dot" id="d1"></div>
+      <div class="pin-dot" id="d2"></div><div class="pin-dot" id="d3"></div>
+    </div>
+    <div class="keypad">
+      <button class="key-btn" onclick="addNum('1')">1</button>
+      <button class="key-btn" onclick="addNum('2')">2</button>
+      <button class="key-btn" onclick="addNum('3')">3</button>
+      <button class="key-btn" onclick="addNum('4')">4</button>
+      <button class="key-btn" onclick="addNum('5')">5</button>
+      <button class="key-btn" onclick="addNum('6')">6</button>
+      <button class="key-btn" onclick="addNum('7')">7</button>
+      <button class="key-btn" onclick="addNum('8')">8</button>
+      <button class="key-btn" onclick="addNum('9')">9</button>
+      <button class="key-btn action" onclick="clearPass()">⌫</button>
+      <button class="key-btn" onclick="addNum('0')">0</button>
+      <button class="key-btn action" onclick="checkPass()">OK</button>
+    </div>
+    <p class="lock-msg" id="lockMsg"></p>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
